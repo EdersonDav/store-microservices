@@ -1,18 +1,17 @@
 import { Name } from '../entities/Name';
 import { Price } from '../entities/Price';
 import { Product } from '../entities/Product';
+import { ProductRepository } from '../repositories/productRepository';
 
 interface ICreateProductRequest {
   price: number;
   name: string;
 }
 
-interface ProductResponse extends ICreateProductRequest {
-  productId: string;
-}
-
 export class CreateProduct {
-  async execute(request: ICreateProductRequest): Promise<ProductResponse> {
+  constructor(private productRepository: ProductRepository) {}
+
+  async execute(request: ICreateProductRequest): Promise<Product> {
     const { name, price } = request;
 
     const product = new Product({
@@ -20,10 +19,8 @@ export class CreateProduct {
       price: new Price(price),
     });
 
-    return {
-      productId: product.id,
-      name: product.name.value,
-      price: product.price.value,
-    };
+    await this.productRepository.create(product);
+
+    return product;
   }
 }

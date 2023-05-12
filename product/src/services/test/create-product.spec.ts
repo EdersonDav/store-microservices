@@ -1,14 +1,17 @@
+import { InMemoryProductRepository } from '../../repositories/repositories-tests/in-memory-product-repository';
 import { CreateProduct } from '../createProduct';
 
 describe('Create Product', () => {
   it('shold be able to create a product', async () => {
-    const createProduct = new CreateProduct();
+    const productRepository = new InMemoryProductRepository();
+    const createProduct = new CreateProduct(productRepository);
 
-    const productFake = {
+    const product = await createProduct.execute({
       name: 'Product test',
       price: 100,
-    };
+    });
 
-    expect(await createProduct.execute(productFake)).toBeTruthy();
+    expect(productRepository.productList).toHaveLength(1);
+    expect(productRepository.productList[0]).toEqual(product);
   });
 });
