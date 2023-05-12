@@ -5,7 +5,7 @@ export class InMemoryProductRepository implements ProductRepository {
   productList: Product[] = [];
 
   async list(): Promise<Product[]> {
-    throw new Error('Method not implemented.');
+    return this.productList;
   }
 
   async create(product: Product) {
