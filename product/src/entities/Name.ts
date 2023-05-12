@@ -6,7 +6,6 @@ export class Name {
     if (!nameLengthValid) {
       throw new Error('Name length is invalid');
     }
-
     this.name = name;
   }
 
