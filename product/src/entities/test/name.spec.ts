@@ -10,7 +10,7 @@ describe('Product Name', () => {
     expect(() => new Name('Ed')).toThrow();
   });
 
-  it('should not be able to create product name with more than 100 characters', () => {
+  it('should not be able to create product name with more than 150 characters', () => {
     expect(() => new Name('Ed'.repeat(150))).toThrow();
   });
 });

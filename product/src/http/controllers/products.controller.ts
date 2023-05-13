@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CreateProductBody } from '../dtos/createProductBody';
 import { CreateProduct } from '../../services/createProduct';
 import { GetProducts } from '../../services/getProducts';
@@ -22,6 +29,7 @@ export class ProductController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   async create(@Body() body: CreateProductBody) {
     const { price, name } = body;
 
