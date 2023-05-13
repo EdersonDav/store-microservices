@@ -1,5 +1,6 @@
 import { Name } from '../entities/Name';
 import { Price } from '../entities/Price';
+import { Injectable } from '@nestjs/common';
 import { Product } from '../entities/Product';
 import { ProductRepository } from '../repositories/productRepository';
 
@@ -8,6 +9,7 @@ interface ICreateProductRequest {
   name: string;
 }
 
+@Injectable()
 export class CreateProduct {
   constructor(private productRepository: ProductRepository) {}
 

@@ -1,4 +1,3 @@
-import { v4 as generate } from 'uuid';
 import { Name } from './Name';
 import { Price } from './Price';
 
@@ -9,15 +8,15 @@ export interface IProductProps {
 
 export class Product {
   private productProps: IProductProps;
-  private productId: string;
+  private id: number;
 
-  constructor(props: IProductProps) {
+  constructor(props: IProductProps, id?: number) {
     this.productProps = props;
-    this.productId = generate();
+    this.id = id ?? 0;
   }
 
-  public get id(): string {
-    return this.productId;
+  public get productId(): number {
+    return this.id;
   }
 
   public set name(name: Name) {
