@@ -31,4 +31,18 @@ export class InMemoryCartRepository implements CartRepository {
       this.carts[cartIndx] = cart;
     }
   }
+
+  async findByCartId(id: number): Promise<Cart> {
+    const cart = this.carts.find((item) => item.shoppingCartId === id);
+
+    if (!cart) {
+      return null;
+    }
+
+    return cart;
+  }
+
+  async delete(id: number): Promise<void> {
+    this.carts = this.carts.filter((cart) => cart.shoppingCartId !== id);
+  }
 }
