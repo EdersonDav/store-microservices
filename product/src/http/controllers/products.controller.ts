@@ -5,6 +5,7 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  HttpCode,
 } from '@nestjs/common';
 import { CreateProductBody } from '../dtos/createProductBody';
 import { CreateProduct } from '../../services/createProduct';
@@ -39,5 +40,16 @@ export class ProductController {
     });
 
     return ProductResponseModel.toView(products);
+  }
+
+  @Post('initial-load')
+  @HttpCode(202)
+  async initialLoad() {
+    for (let index = 1; index < 11; index++) {
+      await this.creatProduct.execute({
+        price: index * 10,
+        name: `Product ${index}`,
+      });
+    }
   }
 }

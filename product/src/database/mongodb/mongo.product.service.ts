@@ -17,4 +17,12 @@ export class MongoProductService {
   async findAll(): Promise<Product[]> {
     return this.productModel.find();
   }
+
+  async getNextId(): Promise<number> {
+    const all = await this.productModel.find().sort({ productId: -1 }).limit(1);
+    if (!all.length) {
+      return 1;
+    }
+    return all[0].productId + 1;
+  }
 }

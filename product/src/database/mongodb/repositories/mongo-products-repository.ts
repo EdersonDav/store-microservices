@@ -14,6 +14,8 @@ export class MongoProductRepository implements ProductRepository {
   }
 
   async create(product: Product): Promise<void> {
-    this.mongoProductService.create(MongoProductsMapper.toMongo(product));
+    const createdProduct = MongoProductsMapper.toMongo(product);
+    createdProduct.productId = await this.mongoProductService.getNextId();
+    this.mongoProductService.create(createdProduct);
   }
 }
