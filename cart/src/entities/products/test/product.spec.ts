@@ -11,7 +11,7 @@ describe('Product', () => {
     expect(product).toBeTruthy();
   });
 
-  it('should not be able to register with quantity less than 1', () => {
+  it('should not be able to register product with quantity less than 1', () => {
     expect(
       () =>
         new Product({
