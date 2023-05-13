@@ -1,4 +1,4 @@
-import { InMemoryProductRepository } from '../../repositories/repositories-tests/in-memory-product-repository';
+import { InMemoryProductRepository } from '../../../repositories/repositories-tests/in-memory-product-repository';
 import { RegisterProduct } from '../register-product';
 
 describe('Register Product', () => {

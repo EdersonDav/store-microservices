@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from '../entities/products/Product';
-import { ProductRepository } from '../repositories/productRepository';
+import { Product } from '../../entities/products/Product';
+import { ProductRepository } from '../../repositories/productRepository';
 
 interface IProductRequest {
   name: string;
