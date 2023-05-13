@@ -14,7 +14,7 @@ interface IProductRequest {
 export class RegisterProduct {
   constructor(private productRepository: ProductRepository) {}
 
-  async execute(request: IProductRequest): Promise<number> {
+  async execute(request: IProductRequest): Promise<Product> {
     const { name, price, productId, quantity, shoppingCartId } = request;
 
     const product = new Product({
@@ -25,8 +25,8 @@ export class RegisterProduct {
       shoppingCartId,
     });
 
-    await this.productRepository.register(product);
+    const productCreated = await this.productRepository.register(product);
 
-    return product.productId;
+    return productCreated;
   }
 }

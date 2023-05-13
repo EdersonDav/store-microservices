@@ -2,19 +2,20 @@ import { InMemoryProductRepository } from '../../../repositories/repositories-te
 import { RegisterProduct } from '../register-product';
 
 describe('Register Product', () => {
-  it('shold be able to register a product', async () => {
+  it('should be able to register a product', async () => {
     const productRepository = new InMemoryProductRepository();
     const registerProduct = new RegisterProduct(productRepository);
 
-    const productId = await registerProduct.execute({
+    const producFake = {
       name: 'Product test',
       price: 100,
       productId: 1,
       quantity: 1,
       shoppingCartId: 1,
-    });
+    };
+    const productCreated = await registerProduct.execute(producFake);
 
     expect(productRepository.productList).toHaveLength(1);
-    expect(productRepository.productList[0].productId).toEqual(productId);
+    expect(productCreated.name).toEqual(producFake.name);
   });
 });

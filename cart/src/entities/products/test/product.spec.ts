@@ -4,10 +4,10 @@ import { Product } from '../Product';
 describe('Product', () => {
   it('should be able to register product', () => {
     const cart = new Cart({
-      products: [],
       totalPrice: 0,
       totalQuantity: 0,
       userId: 'user id',
+      shoppingCartId: 1,
     });
     const product = new Product({
       price: 20,
@@ -21,10 +21,10 @@ describe('Product', () => {
 
   it('should not be able to register product with quantity less than 1', () => {
     const cart = new Cart({
-      products: [],
       totalPrice: 0,
       totalQuantity: 0,
       userId: 'user id',
+      shoppingCartId: 1,
     });
 
     expect(
@@ -47,7 +47,7 @@ describe('Product', () => {
           name: 'Test Product 01',
           productId: 123,
           quantity: 0,
-          shoppingCartId: null,
+          shoppingCartId: 1,
         }),
     ).toThrow();
   });

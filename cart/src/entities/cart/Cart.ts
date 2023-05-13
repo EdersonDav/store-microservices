@@ -1,50 +1,42 @@
-import { Product } from '../products/Product';
-
-export interface ICart {
+export interface ICartProps {
   userId: string;
-  totalPrice?: number;
-  totalQuantity?: number;
-  products?: Product[];
+  totalPrice: number;
+  totalQuantity: number;
+  shoppingCartId: number;
 }
 
 export class Cart {
-  private props: ICart;
-  private id: number;
+  private cartProps: ICartProps;
 
-  constructor(props: ICart, id?: number) {
-    this.props = props;
-    this.id = id ?? Math.ceil(Math.random() * 10);
+  constructor(props: ICartProps) {
+    this.cartProps = props;
   }
 
   public get shoppingCartId(): number {
-    return this.id;
+    return this.cartProps.shoppingCartId;
+  }
+
+  public set shoppingCartId(shoppingCartId: number) {
+    this.cartProps.shoppingCartId = shoppingCartId;
   }
 
   public get userId(): string {
-    return this.props.userId;
+    return this.cartProps.userId;
   }
 
   public get totalPrice(): number {
-    return this.props.totalPrice;
+    return this.cartProps.totalPrice;
   }
 
   public set totalPrice(totalPrice: number) {
-    this.props.totalPrice = totalPrice;
+    this.cartProps.totalPrice = totalPrice;
   }
 
   public get totalQuantity(): number {
-    return this.props.totalPrice;
+    return this.cartProps.totalQuantity;
   }
 
   public set totalQuantity(totalQuantity: number) {
-    this.props.totalQuantity = totalQuantity;
-  }
-
-  public get products(): Product[] {
-    return this.props.products;
-  }
-
-  public set products(products: Product[]) {
-    this.props.products = products;
+    this.cartProps.totalQuantity = totalQuantity;
   }
 }

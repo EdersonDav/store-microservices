@@ -4,8 +4,9 @@ import { ProductRepository } from '../productRepository';
 export class InMemoryProductRepository implements ProductRepository {
   productList: Product[] = [];
 
-  async register(product: Product) {
+  async register(product: Product): Promise<Product> {
     this.productList.push(product);
+    return product;
   }
 
   async findById(id: number): Promise<Product | null> {
@@ -34,14 +35,30 @@ export class InMemoryProductRepository implements ProductRepository {
   }
 
   async findByCartId(id: number): Promise<Product[] | null> {
-    const products = (this.productList = this.productList.filter(
+    const products = this.productList.filter(
       (product) => product.shoppingCartId === id,
-    ));
+    );
 
     if (!products.length) {
       return null;
     }
 
     return products;
+  }
+
+  async findByCartIdAndProductId(
+    cartId: number,
+    producId: number,
+  ): Promise<Product | null> {
+    const product = this.productList.find(
+      (product) =>
+        product.shoppingCartId === cartId && product.productId === producId,
+    );
+
+    if (!product) {
+      return null;
+    }
+
+    return product;
   }
 }

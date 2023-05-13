@@ -1,12 +1,12 @@
 import { InMemoryCartRepository } from '../../../repositories/repositories-tests/in-memory-cart-repository';
-import { RegisterCart } from '../create-cart';
+import { CreateCart } from '../create-cart';
 
 describe('Create Cart', () => {
-  it('shold be able to create cart', async () => {
+  it('should be able to create cart', async () => {
     const cartRepository = new InMemoryCartRepository();
-    const register = new RegisterCart(cartRepository);
+    const register = new CreateCart(cartRepository);
     const userFakeId = 'user ID';
-    const cartId = await register.execute(userFakeId);
-    expect(cartId).toBeLessThanOrEqual(10);
+    const cart = await register.execute(userFakeId);
+    expect(cart.shoppingCartId).toBeLessThanOrEqual(10);
   });
 });

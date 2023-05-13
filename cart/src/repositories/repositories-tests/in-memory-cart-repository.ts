@@ -1,26 +1,34 @@
 import { Cart } from '../../entities/cart/Cart';
 import { CartRepository } from '../cartRepository';
 
-interface ICartInDB extends Omit<Cart, 'products'> {
-  shoppingCartId: number;
-  totalPrice: number;
-  totalQuantity: number;
-}
-
 export class InMemoryCartRepository implements CartRepository {
-  carts: ICartInDB[] = [];
+  carts: Cart[] = [];
 
-  async create(cart: Cart): Promise<number> {
+  async create(cart: Cart): Promise<Cart> {
     const id = Math.ceil(Math.random() * 10);
+    cart.shoppingCartId = id;
+    this.carts.push(cart);
 
-    const cartDB = {
-      shoppingCartId: id,
-      userId: cart.userId,
-      totalPrice: 0,
-      totalQuantity: 0,
-    };
+    return cart;
+  }
 
-    this.carts.push(cartDB);
-    return cartDB.shoppingCartId;
+  async findByUserId(id: string): Promise<Cart | null> {
+    const cart = this.carts.find((item) => item.userId === id);
+
+    if (!cart) {
+      return null;
+    }
+
+    return cart;
+  }
+
+  async save(cart: Cart): Promise<void> {
+    const cartIndx = this.carts.findIndex(
+      (item) => item.shoppingCartId === cart.shoppingCartId,
+    );
+
+    if (cartIndx >= 0) {
+      this.carts[cartIndx] = cart;
+    }
   }
 }

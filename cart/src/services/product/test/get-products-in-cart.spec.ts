@@ -3,7 +3,7 @@ import { GetProductInCart } from '../get-products-in-cart';
 import { RegisterProduct } from '../register-product';
 
 describe('Product In Cart', () => {
-  it('shold be able to get products in cart', async () => {
+  it('should be able to get products in cart', async () => {
     const productRepository = new InMemoryProductRepository();
     const register = new RegisterProduct(productRepository);
     const getProducts = new GetProductInCart(productRepository);
