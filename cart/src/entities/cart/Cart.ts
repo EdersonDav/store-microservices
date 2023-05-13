@@ -2,9 +2,9 @@ import { Product } from '../products/Product';
 
 export interface ICart {
   userId: string;
-  totalPrice: number;
-  totalQuantity: number;
-  products: Product[];
+  totalPrice?: number;
+  totalQuantity?: number;
+  products?: Product[];
 }
 
 export class Cart {
