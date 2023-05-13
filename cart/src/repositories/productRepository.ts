@@ -5,4 +5,5 @@ export abstract class ProductRepository {
   abstract findById(id: number): Promise<Product | null>;
   abstract save(product: Product): Promise<void>;
   abstract delete(id: number): Promise<void>;
+  abstract findByCartId(id: number): Promise<Product[] | null>;
 }

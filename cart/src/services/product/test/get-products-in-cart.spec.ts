@@ -1,14 +1,14 @@
 import { InMemoryProductRepository } from '../../../repositories/repositories-tests/in-memory-product-repository';
-import { DeleteProduct } from '../delete-product';
+import { GetProductInCart } from '../get-products-in-cart';
 import { RegisterProduct } from '../register-product';
 
-describe('Delete Product', () => {
-  it('shold be able to delete product', async () => {
+describe('Product In Cart', () => {
+  it('shold be able to get products in cart', async () => {
     const productRepository = new InMemoryProductRepository();
     const register = new RegisterProduct(productRepository);
-    const deleteProduct = new DeleteProduct(productRepository);
+    const getProducts = new GetProductInCart(productRepository);
 
-    const productId = await register.execute({
+    await register.execute({
       name: 'Product test',
       price: 100,
       productId: 1,
@@ -16,7 +16,7 @@ describe('Delete Product', () => {
       shoppingCartId: 1,
     });
 
-    const productId2 = await register.execute({
+    await register.execute({
       name: 'Product test',
       price: 100,
       productId: 2,
@@ -24,11 +24,8 @@ describe('Delete Product', () => {
       shoppingCartId: 1,
     });
 
-    expect(productRepository.productList).toHaveLength(2);
+    const products = await getProducts.execute({ shoppingCartId: 1 });
 
-    await deleteProduct.execute({ productId });
-
-    expect(productRepository.productList[0].productId).toEqual(productId2);
-    expect(productRepository.productList).toHaveLength(1);
+    expect(products).toHaveLength(2);
   });
 });
