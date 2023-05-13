@@ -11,6 +11,7 @@ describe('Register Product', () => {
       price: 100,
       productId: 1,
       quantity: 1,
+      shoppingCartId: 1,
     });
 
     expect(productRepository.productList).toHaveLength(1);

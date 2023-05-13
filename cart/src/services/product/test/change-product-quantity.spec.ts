@@ -14,6 +14,7 @@ describe('Change Product', () => {
       price: 100,
       productId: 1,
       quantity: 1,
+      shoppingCartId: 1,
     });
 
     await change.execute({

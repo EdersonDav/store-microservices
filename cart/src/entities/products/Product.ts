@@ -3,6 +3,7 @@ export interface IProductProps {
   price: number;
   quantity: number;
   productId: number;
+  shoppingCartId: number;
 }
 
 export class Product {
@@ -12,7 +13,16 @@ export class Product {
     if (props.quantity <= 0) {
       throw new Error('Product quantity invalid');
     }
+
+    if (!props.shoppingCartId) {
+      throw new Error('Cart id is necessary');
+    }
+
     this.productProps = props;
+  }
+
+  public get shoppingCartId(): number {
+    return this.productProps.shoppingCartId;
   }
 
   public get name(): string {

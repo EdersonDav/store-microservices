@@ -1,5 +1,4 @@
 import { InMemoryProductRepository } from '../../../repositories/repositories-tests/in-memory-product-repository';
-import { ProductNotFound } from '../../errors/product-not-found';
 import { DeleteProduct } from '../delete-product';
 import { RegisterProduct } from '../register-product';
 
@@ -14,6 +13,7 @@ describe('Change Product', () => {
       price: 100,
       productId: 1,
       quantity: 1,
+      shoppingCartId: 1,
     });
 
     const productId2 = await register.execute({
@@ -21,6 +21,7 @@ describe('Change Product', () => {
       price: 100,
       productId: 2,
       quantity: 1,
+      shoppingCartId: 1,
     });
 
     expect(productRepository.productList).toHaveLength(2);

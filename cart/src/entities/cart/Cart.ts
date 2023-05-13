@@ -12,16 +12,8 @@ export class Cart {
   private id: number;
 
   constructor(props: ICart, id?: number) {
-    if (!props.products.length) {
-      throw new Error('Product is necessary');
-    }
-
-    if (props.totalQuantity <= 0) {
-      throw new Error('Total quantity invalid');
-    }
-
     this.props = props;
-    this.id = id ?? 0;
+    this.id = id ?? Math.ceil(Math.random() * 10);
   }
 
   public get shoppingCartId(): number {

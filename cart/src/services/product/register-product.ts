@@ -7,6 +7,7 @@ interface IProductRequest {
   price: number;
   quantity: number;
   productId: number;
+  shoppingCartId: number;
 }
 
 @Injectable()
@@ -14,13 +15,14 @@ export class RegisterProduct {
   constructor(private productRepository: ProductRepository) {}
 
   async execute(request: IProductRequest): Promise<number> {
-    const { name, price, productId, quantity } = request;
+    const { name, price, productId, quantity, shoppingCartId } = request;
 
     const product = new Product({
       name,
       price,
       productId,
       quantity,
+      shoppingCartId,
     });
 
     await this.productRepository.register(product);
