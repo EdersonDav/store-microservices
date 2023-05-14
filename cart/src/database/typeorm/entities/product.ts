@@ -6,9 +6,12 @@ class Product {
   @PrimaryColumn()
   product_id: number;
 
+  @Column()
+  shopping_cart_id: number;
+
   @ManyToOne(() => Cart)
   @JoinColumn({ name: 'shopping_cart_id' })
-  shopping_cart_id: Cart;
+  cart: Cart;
 
   @Column({ nullable: false })
   quantity: number;

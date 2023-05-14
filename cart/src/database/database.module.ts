@@ -1,6 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CartService } from './typeorm/typorm.cart.service';
+import { ProductService } from './typeorm/typorm.products.service';
+import { CartRepository } from '../repositories/cartRepository';
+import { ProductRepository } from '../repositories/productRepository';
+import { TypeORMCartRepository } from './typeorm/repositories/typeorm-cart-repository';
+import { TypeORMProductRepository } from './typeorm/repositories/typeorm-product-repository';
+import CartEntity from './typeorm/entities/cart';
+import ProductEntity from './typeorm/entities/product';
 
 @Module({
   imports: [
@@ -18,6 +26,20 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([CartEntity, ProductEntity]),
   ],
+  providers: [
+    CartService,
+    {
+      provide: CartRepository,
+      useClass: TypeORMCartRepository,
+    },
+    ProductService,
+    {
+      provide: ProductRepository,
+      useClass: TypeORMProductRepository,
+    },
+  ],
+  exports: [CartRepository, ProductRepository],
 })
 export class DataBaseModule {}
