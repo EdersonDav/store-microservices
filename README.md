@@ -101,7 +101,7 @@
 
 `(serviço de produto)/products/initial-load`
 
-**Na API gateway existe a documentação das no swagger, após a API rodar basta acessar a rota.**
+**Na API gateway existe a documentação das rotas no swagger. Após a API rodar basta acessar a rota.**
 
 `(gateway)/api`
 
