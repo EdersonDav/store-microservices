@@ -3,7 +3,6 @@ import { CartMapper } from '../mappers/CartMapper';
 import { CartRepository } from '../repositories/CartRepository';
 import { ProductRepository } from '../repositories/ProductRepository';
 import { ICart, ICartProducts } from '../types/interfaces';
-import { GatewayError } from '../client/errors/GatewayError';
 
 @Injectable()
 export class CartService {

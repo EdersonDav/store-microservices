@@ -12,12 +12,16 @@ import {
 import { CartService } from '../../service/CartService';
 import { ICart } from '../../types/interfaces';
 import { CreateProductBody } from '../../dtos/productBody';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { CartResponse } from '../../swagger/ResponsesClasses';
 
+@ApiTags('Carts')
 @Controller('cart')
 export class CartsController {
   constructor(private readonly cartService: CartService) {}
 
   @Get(':userId')
+  @ApiOkResponse({ type: CartResponse })
   async get(@Param('userId') userId: string): Promise<ICart> {
     const cart = await this.cartService.getCart(userId);
     return cart;
