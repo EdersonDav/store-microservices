@@ -9,7 +9,7 @@ class Cart {
   @Column({ nullable: false })
   user_id: string;
 
-  @Column()
+  @Column({ type: 'decimal' })
   total_price: number;
 
   @Column()

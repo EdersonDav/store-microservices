@@ -16,7 +16,7 @@ class Product {
   @Column({ nullable: false })
   quantity: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'decimal' })
   price: number;
 
   @Column()

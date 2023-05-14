@@ -14,8 +14,8 @@ export class ORMCartMapper {
   static toDomain(cart: CartEntity): Cart {
     return new Cart({
       shoppingCartId: cart.shopping_cart_id,
-      totalPrice: cart.total_price,
-      totalQuantity: cart.total_quantity,
+      totalPrice: Number(cart.total_price),
+      totalQuantity: Number(cart.total_quantity),
       userId: cart.user_id,
     });
   }

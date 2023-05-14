@@ -15,9 +15,9 @@ export class ORMProductMapper {
   static toDomain(product: ProductEntity): Product {
     return new Product({
       name: product.name,
-      price: product.price,
+      price: Number(product.price),
       productId: product.product_id,
-      quantity: product.quantity,
+      quantity: Number(product.quantity),
       shoppingCartId: product.shopping_cart_id,
     });
   }

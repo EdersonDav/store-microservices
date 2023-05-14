@@ -31,7 +31,15 @@ export class CartController {
   @Post()
   @UsePipes(ValidationPipe)
   async post(@Body() body: CreateCartBody) {
-    const cart = await this.addProductInCart.execute(body);
+    const cart = await this.addProductInCart.execute({
+      userId: body.userId,
+      product: {
+        name: body.product.name,
+        price: Number(body.product.price),
+        productId: body.product.productId,
+        quantity: Number(body.product.quantity),
+      },
+    });
     return cart;
   }
 

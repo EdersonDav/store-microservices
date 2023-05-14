@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Gateway } from '../client/Gateway';
 import { GatewayError } from '../client/errors/GatewayError';
-import { ICartApiResponse } from '../types/interfaces';
+import { ICartApiResponse, ICartProducts } from '../types/interfaces';
 
 @Injectable()
 export class CartRepository {
@@ -28,6 +28,18 @@ export class CartRepository {
   async deleteProductInCart(userId: string, productId: number): Promise<void> {
     try {
       await this.gateway.request.delete(`/cart/${userId}/product/${productId}`);
+    } catch (error) {
+      const { statusCode, message } = error.response.data;
+      throw new GatewayError(statusCode, message);
+    }
+  }
+
+  async addProduct(userId: string, product: ICartProducts): Promise<void> {
+    try {
+      await this.gateway.request.post(`/cart/`, {
+        userId,
+        product,
+      });
     } catch (error) {
       const { statusCode, message } = error.response.data;
       throw new GatewayError(statusCode, message);

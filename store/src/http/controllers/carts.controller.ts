@@ -1,6 +1,17 @@
-import { Controller, Delete, Get, HttpCode, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CartService } from '../../service/CartService';
 import { ICart } from '../../types/interfaces';
+import { CreateProductBody } from '../../dtos/productBody';
 
 @Controller('cart')
 export class CartsController {
@@ -19,5 +30,12 @@ export class CartsController {
     @Param('productId') productId: number,
   ) {
     await this.cartService.deleteProductInCart(userId, productId);
+  }
+
+  @HttpCode(202)
+  @Post(':userId/product')
+  @UsePipes(ValidationPipe)
+  async post(@Param('userId') userId: string, @Body() body: CreateProductBody) {
+    await this.cartService.addProduct(userId, body);
   }
 }
