@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Gateway } from '../client/Gateway';
-import { IProducts } from '../types/interfaces';
+import { ICartProducts, IProducts } from '../types/interfaces';
 import { GatewayError } from '../client/errors/GatewayError';
 
 @Injectable()
@@ -22,6 +22,19 @@ export class ProductRepository {
     } catch (error) {
       const { statusCode, message } = error.response.data;
       throw new GatewayError(statusCode, message);
+    }
+  }
+
+  async isProductValid(product: ICartProducts): Promise<void> {
+    const products: IProducts[] = await this.listProducts();
+    const productFind = products.find(
+      (item) => item.productId === product.productId,
+    );
+    if (!productFind) {
+      throw new GatewayError(400, 'Product not exists');
+    }
+    if (Number(product.price) != Number(productFind.price)) {
+      throw new GatewayError(400, 'Product prices invalid');
     }
   }
 }
