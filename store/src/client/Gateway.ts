@@ -1,9 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 
 export class Gateway {
-  public readonly gateway: AxiosInstance;
+  public readonly request: AxiosInstance;
   constructor(url: string) {
-    this.gateway = axios.create({
+    this.request = axios.create({
       baseURL: url,
     });
   }
