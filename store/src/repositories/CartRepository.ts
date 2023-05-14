@@ -17,9 +17,17 @@ export class CartRepository {
 
   async getCart(userId: string): Promise<ICartApiResponse> {
     try {
-      const cart = await this.gateway.request.get(`/cart/${userId}`);
+      const { data } = await this.gateway.request.get(`/cart/${userId}`);
+      return data;
+    } catch (error) {
+      const { statusCode, message } = error.response.data;
+      throw new GatewayError(statusCode, message);
+    }
+  }
 
-      return cart.data;
+  async deleteProductInCart(userId: string, productId: number): Promise<void> {
+    try {
+      await this.gateway.request.delete(`/cart/${userId}/product/${productId}`);
     } catch (error) {
       const { statusCode, message } = error.response.data;
       throw new GatewayError(statusCode, message);

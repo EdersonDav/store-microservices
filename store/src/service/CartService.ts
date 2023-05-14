@@ -12,4 +12,8 @@ export class CartService {
 
     return CartMapper.getCart(cart);
   }
+
+  async deleteProductInCart(userId: string, productId: number): Promise<void> {
+    await this.cartRepository.deleteProductInCart(userId, productId);
+  }
 }

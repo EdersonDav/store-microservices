@@ -17,8 +17,8 @@ export class ProductRepository {
 
   async listProducts(): Promise<IProducts[]> {
     try {
-      const products = await this.gateway.request.get('/products');
-      return products.data;
+      const { data } = await this.gateway.request.get('/products');
+      return data;
     } catch (error) {
       const { statusCode, message } = error.response.data;
       throw new GatewayError(statusCode, message);

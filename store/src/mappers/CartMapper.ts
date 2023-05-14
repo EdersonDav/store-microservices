@@ -8,11 +8,11 @@ import {
 export class CartMapper {
   static getCart(cart: ICartApiResponse): ICart {
     return {
-      products: cart.products.map(this.getProducts),
       shoppingCartId: cart.shoppingCartId,
       totalPrice: cart.totalPrice,
       totalQuantity: cart.totalQuantity,
       userId: cart.userId,
+      products: cart.products.map(this.getProducts),
     };
   }
 
