@@ -6,7 +6,7 @@ import { RemoveProducts } from '../product/remove-product';
 import { DeleteCart } from './delete-cart';
 import { CartNotFound } from './errors/cart-not-found';
 
-interface CartRequest {
+export interface CartUpdateRequest {
   productId: number;
   quantity?: number;
   userId: string;
@@ -19,7 +19,7 @@ export class RemoveProductInCart {
     private productRepository: ProductRepository,
   ) {}
 
-  async execute(request: CartRequest): Promise<Cart> {
+  async execute(request: CartUpdateRequest): Promise<Cart> {
     const { productId, quantity, userId } = request;
 
     const cart = await this.cartRepository.findByUserId(userId);

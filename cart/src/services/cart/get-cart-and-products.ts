@@ -5,7 +5,7 @@ import { ProductRepository } from '../../repositories/productRepository';
 import { CartNotFound } from './errors/cart-not-found';
 import { Product } from '../../entities/products/Product';
 
-interface IGetProductInCart {
+export interface IGetProductInCart {
   userId: string;
   totalPrice: number;
   totalQuantity: number;

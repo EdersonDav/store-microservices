@@ -9,7 +9,6 @@ export class GetCart {
 
   async execute(userId: string): Promise<Cart> {
     const cart = await this.cartRepository.findByUserId(userId);
-
     if (cart) {
       return cart;
     }

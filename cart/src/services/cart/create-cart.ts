@@ -9,13 +9,13 @@ export class CreateCart {
   async execute(userId: string): Promise<Cart> {
     const cart = new Cart({
       userId,
-      shoppingCartId: 0,
+      shoppingCartId: 1,
       totalPrice: 0,
       totalQuantity: 0,
     });
 
-    await this.cartRepository.create(cart);
+    const cartCreated = await this.cartRepository.create(cart);
 
-    return cart;
+    return cartCreated;
   }
 }

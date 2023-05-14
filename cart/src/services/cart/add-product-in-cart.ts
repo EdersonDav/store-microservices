@@ -5,7 +5,7 @@ import { ProductRepository } from '../../repositories/productRepository';
 import { GetCart } from './get-cart';
 import { AddProducts } from '../product/add-product';
 
-interface CartRequest {
+export interface CartRequest {
   userId: string;
   product: {
     name: string;
