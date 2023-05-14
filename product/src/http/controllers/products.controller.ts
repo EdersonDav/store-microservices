@@ -47,7 +47,7 @@ export class ProductController {
   async initialLoad() {
     for (let index = 1; index < 11; index++) {
       await this.creatProduct.execute({
-        price: index * 10,
+        price: index * 7,
         name: `Product ${index}`,
       });
     }
