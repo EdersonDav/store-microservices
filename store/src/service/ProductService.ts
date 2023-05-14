@@ -13,6 +13,6 @@ export class ProductService {
     if (!products.length) {
       return [];
     }
-    return products.map(ProductMapper.toDomain);
+    return products.map(ProductMapper.listProducts);
   }
 }
